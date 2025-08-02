@@ -41,4 +41,7 @@ window.onload = function() {
   var h = document.getElementById('h');
   h.style.opacity = '0';
   h.style.visibility = 'hidden';
+  
+  // 强制字体缩放补偿
+  document.body.style.fontSize = '125%';
 };
