@@ -4,7 +4,7 @@ body {
   background-color: #000;
   color: #0f0;
   background-image: linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px);
-  background-size: 25px 25px;
+  background-size: 28px 28px;
   animation: i 20s linear infinite;
   height: 100vh;
   overflow: hidden;
@@ -12,7 +12,7 @@ body {
 
 @keyframes i {
   0% { background-position: 0 0; }
-  100% { background-position: -125px -125px; }
+  100% { background-position: -140px -140px; }
 }
 
 #a {
@@ -33,7 +33,7 @@ h1 {
   display: flex;
   flex-direction: column;
   width: 300px;
-  position: relative; /* 新增关键定位 */
+  position: relative;
 }
 
 input[type="text"], input[type="password"] {
@@ -77,10 +77,10 @@ button:hover {
 }
 
 #h {
-  position: absolute; /* 关键修改 */
-  top: calc(100% + 5px); /* 精确固定在按钮下方 */
+  position: absolute;
+  top: calc(100% + 5px);
   width: 100%;
-  height: 20px; /* 预留固定空间 */
+  height: 20px;
   opacity: 0;
   visibility: hidden;
   color: #f00;
@@ -88,7 +88,6 @@ button:hover {
   transition: opacity 0.3s;
 }
 
-/* 新增：始终保留错误提示空间 */
 #b::after {
   content: "";
   display: block;
