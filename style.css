@@ -8,6 +8,7 @@ body {
   animation: i 20s linear infinite;
   height: 100vh;
   overflow: hidden;
+  font-size: 125%;
 }
 
 @keyframes i {
@@ -25,50 +26,54 @@ body {
 }
 
 h1 {
-  margin-bottom: 30px;
-  text-shadow: 0 0 5px #0f0;
+  margin-bottom: 38px;
+  text-shadow: 0 0 6px #0f0;
+  font-size: 125%;
 }
 
 #b {
   display: flex;
   flex-direction: column;
-  width: 300px;
-  position: relative; /* 新增关键定位 */
+  width: 375px;
+  position: relative;
 }
 
 input[type="text"], input[type="password"] {
-  margin: 10px 0;
-  padding: 8px;
+  margin: 13px 0;
+  padding: 10px;
   background-color: #000;
   color: #0f0;
   border: 1px solid #0f0;
   outline: none;
+  font-size: 100%;
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
   border-color: #0f0;
-  box-shadow: 0 0 5px #0f0;
+  box-shadow: 0 0 6px #0f0;
 }
 
 #g {
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 #f {
   display: flex;
   align-items: center;
-  margin: 5px 0;
+  margin: 6px 0;
+  font-size: 100%;
 }
 
 button {
-  margin-top: 15px;
-  padding: 10px;
+  margin-top: 19px;
+  padding: 13px 10px;
   background-color: #000;
   color: #0f0;
   border: 1px solid #0f0;
   cursor: pointer;
   transition: all 0.3s;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 100%;
 }
 
 button:hover {
@@ -77,21 +82,21 @@ button:hover {
 }
 
 #h {
-  position: absolute; /* 关键修改 */
-  top: calc(100% + 5px); /* 精确固定在按钮下方 */
+  position: absolute;
+  top: calc(100% + 6px);
   width: 100%;
-  height: 20px; /* 预留固定空间 */
+  height: 25px;
   opacity: 0;
   visibility: hidden;
   color: #f00;
   text-align: center;
   transition: opacity 0.3s;
+  font-size: 100%;
 }
 
-/* 新增：始终保留错误提示空间 */
 #b::after {
   content: "";
   display: block;
-  height: 20px;
-  margin-top: 5px;
+  height: 25px;
+  margin-top: 6px;
 }
