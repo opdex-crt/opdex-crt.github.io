@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background-color: #000;
+  color: #0f0;
+  background-image: linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px);
+  background-size: 25px 25px;
+  animation: i 20s linear infinite;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@keyframes i {
+  0% { background-position: 0 0; }
+  100% { background-position: -125px -125px; }
+}
+
+#a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+  text-shadow: 0 0 5px #0f0;
+}
+
+#b {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  position: relative; /* 新增关键定位 */
+}
+
+input[type="text"], input[type="password"] {
+  margin: 10px 0;
+  padding: 8px;
+  background-color: #000;
+  color: #0f0;
+  border: 1px solid #0f0;
+  outline: none;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  border-color: #0f0;
+  box-shadow: 0 0 5px #0f0;
+}
+
+#g {
+  margin-right: 5px;
+}
+
+#f {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #000;
+  color: #0f0;
+  border: 1px solid #0f0;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #0f0;
+  color: #000;
+}
+
+#h {
+  position: absolute; /* 关键修改 */
+  top: calc(100% + 5px); /* 精确固定在按钮下方 */
+  width: 100%;
+  height: 20px; /* 预留固定空间 */
+  opacity: 0;
+  visibility: hidden;
+  color: #f00;
+  text-align: center;
+  transition: opacity 0.3s;
+}
+
+/* 新增：始终保留错误提示空间 */
+#b::after {
+  content: "";
+  display: block;
+  height: 20px;
+  margin-top: 5px;
+}
