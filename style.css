@@ -1,50 +1,18 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: 'Courier New', monospace;
   background-color: #000;
   color: #0f0;
+  background-image: linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px);
+  background-size: 25px 25px;
+  animation: i 20s linear infinite;
   height: 100vh;
   overflow: hidden;
-  position: relative;
 }
 
-/* 网格背景层 - 独立于内容缩放 */
-.grid-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-image: linear-gradient(rgba(0, 255, 0, 0.15) 1.25px, transparent 1.25px), 
-                    linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1.25px, transparent 1.25px);
-  background-size: 31.25px 31.25px;
-  animation: grid-move 20s linear infinite;
-}
-
-@keyframes grid-move {
-  0% { 
-    background-position: 0 0; 
-  }
-  100% { 
-    background-position: -156.25px -156.25px; 
-  }
-}
-
-/* 内容缩放容器 - 精确125%放大 */
-#scale-container {
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 10%;
-  left: 10%;
-  transform: scale(1.25);
-  transform-origin: 0 0;
-  pointer-events: auto;
+@keyframes i {
+  0% { background-position: 0 0; }
+  100% { background-position: -125px -125px; }
 }
 
 #a {
@@ -52,21 +20,20 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   text-align: center;
 }
 
 h1 {
   margin-bottom: 30px;
   text-shadow: 0 0 5px #0f0;
-  font-size: 1.25em;
 }
 
 #b {
   display: flex;
   flex-direction: column;
   width: 300px;
-  position: relative;
+  position: relative; /* 新增关键定位 */
 }
 
 input[type="text"], input[type="password"] {
@@ -76,7 +43,6 @@ input[type="text"], input[type="password"] {
   color: #0f0;
   border: 1px solid #0f0;
   outline: none;
-  font-size: 1.25em;
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
@@ -92,7 +58,6 @@ input[type="text"]:focus, input[type="password"]:focus {
   display: flex;
   align-items: center;
   margin: 5px 0;
-  font-size: 1.25em;
 }
 
 button {
@@ -104,7 +69,6 @@ button {
   cursor: pointer;
   transition: all 0.3s;
   border-radius: 8px;
-  font-size: 1.25em;
 }
 
 button:hover {
@@ -113,18 +77,18 @@ button:hover {
 }
 
 #h {
-  position: absolute;
-  top: calc(100% + 5px);
+  position: absolute; /* 关键修改 */
+  top: calc(100% + 5px); /* 精确固定在按钮下方 */
   width: 100%;
-  height: 20px;
+  height: 20px; /* 预留固定空间 */
   opacity: 0;
   visibility: hidden;
   color: #f00;
   text-align: center;
   transition: opacity 0.3s;
-  font-size: 1.25em;
 }
 
+/* 新增：始终保留错误提示空间 */
 #b::after {
   content: "";
   display: block;
