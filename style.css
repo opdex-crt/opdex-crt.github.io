@@ -4,16 +4,25 @@ body {
   background-color: #000;
   color: #0f0;
   background-image: linear-gradient(rgba(0, 255, 0, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.15) 1px, transparent 1px);
-  background-size: 25px 25px;
+  background-size: 31.25px 31.25px;
   animation: i 20s linear infinite;
   height: 100vh;
   overflow: hidden;
-  font-size: 125%;
 }
 
 @keyframes i {
   0% { background-position: 0 0; }
-  100% { background-position: -125px -125px; }
+  100% { background-position: -156.25px -156.25px; }
+}
+
+#app-container {
+  transform: scale(1.25);
+  transform-origin: top left;
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
 }
 
 #a {
@@ -26,54 +35,50 @@ body {
 }
 
 h1 {
-  margin-bottom: 38px;
-  text-shadow: 0 0 6px #0f0;
-  font-size: 125%;
+  margin-bottom: 30px;
+  text-shadow: 0 0 5px #0f0;
 }
 
 #b {
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 300px;
   position: relative;
 }
 
 input[type="text"], input[type="password"] {
-  margin: 13px 0;
-  padding: 10px;
+  margin: 10px 0;
+  padding: 8px;
   background-color: #000;
   color: #0f0;
   border: 1px solid #0f0;
   outline: none;
-  font-size: 100%;
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
   border-color: #0f0;
-  box-shadow: 0 0 6px #0f0;
+  box-shadow: 0 0 5px #0f0;
 }
 
 #g {
-  margin-right: 6px;
+  margin-right: 5px;
 }
 
 #f {
   display: flex;
   align-items: center;
-  margin: 6px 0;
-  font-size: 100%;
+  margin: 5px 0;
 }
 
 button {
-  margin-top: 19px;
-  padding: 13px 10px;
+  margin-top: 15px;
+  padding: 10px;
   background-color: #000;
   color: #0f0;
   border: 1px solid #0f0;
   cursor: pointer;
   transition: all 0.3s;
-  border-radius: 10px;
-  font-size: 100%;
+  border-radius: 8px;
 }
 
 button:hover {
@@ -83,20 +88,19 @@ button:hover {
 
 #h {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 5px);
   width: 100%;
-  height: 25px;
+  height: 20px;
   opacity: 0;
   visibility: hidden;
   color: #f00;
   text-align: center;
   transition: opacity 0.3s;
-  font-size: 100%;
 }
 
 #b::after {
   content: "";
   display: block;
-  height: 25px;
-  margin-top: 6px;
+  height: 20px;
+  margin-top: 5px;
 }
