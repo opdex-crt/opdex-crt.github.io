@@ -41,4 +41,27 @@ window.onload = function() {
   var h = document.getElementById('h');
   h.style.opacity = '0';
   h.style.visibility = 'hidden';
+  
+  var q = document.getElementById('q');
+  var r = 0;
+  
+  q.addEventListener('mousedown', function() {
+    r = Date.now();
+  });
+  
+  q.addEventListener('mouseup', function() {
+    if (Date.now() - r >= 3000) {
+      window.location.href = '404.html';
+    }
+  });
+  
+  q.addEventListener('touchstart', function() {
+    r = Date.now();
+  });
+  
+  q.addEventListener('touchend', function() {
+    if (Date.now() - r >= 3000) {
+      window.location.href = '404.html';
+    }
+  });
 };
