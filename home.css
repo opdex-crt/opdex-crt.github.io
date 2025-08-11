@@ -138,11 +138,12 @@ body {
 
 #captcha-input {
   width: 100%;
-  padding: 8px;
+  padding: 8px 10px;
   background-color: #000;
   color: #0f0;
   border: 1px solid #0f0;
   outline: none;
+  box-sizing: border-box;
 }
 
 #captcha-input:focus {
@@ -152,13 +153,16 @@ body {
 
 #captcha-submit {
   width: 100%;
-  padding: 10px;
+  padding: 8px 10px;
   background-color: #000;
   color: #0f0;
   border: 1px solid #0f0;
   cursor: pointer;
   transition: all 0.3s;
   border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
 }
 
 #captcha-submit:hover {
