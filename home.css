@@ -43,12 +43,14 @@ body {
 }
 
 .c {
-  padding: 10px 15px;
+  padding: 12px 15px; /* 微调垂直间距 */
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin: 5px 0;
   position: relative;
   left: 0;
+  font-size: 16px; /* 字体加大 */
+  font-weight: bold; /* 字体加粗 */
 }
 
 .c:hover {
@@ -84,8 +86,6 @@ body {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-top: 0; /* 确保无额外顶部填充 */
-  margin-top: 0; /* 确保无额外顶部外边距 */
 }
 
 #d-content::-webkit-scrollbar {
@@ -95,7 +95,6 @@ body {
 #d h2 {
   text-shadow: 0 0 5px #0f0;
   margin-top: 0;
-  padding-top: 0; /* 消除浏览器默认顶部填充 */
 }
 
 #d p {
