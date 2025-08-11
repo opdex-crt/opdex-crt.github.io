@@ -38,7 +38,7 @@ body {
 
 #b {
   width: 200px;
-  padding: 17px 0 20px 0; /* 精确调整上内边距 */
+  padding: 17px 0 20px 0;
   border-right: 1px solid #0f0;
 }
 
@@ -61,7 +61,7 @@ body {
 
 #d {
   flex: 1;
-  padding: 20px; /* 保持原值 */
+  padding: 20px;
   overflow: hidden;
   position: relative;
 }
@@ -100,4 +100,68 @@ body {
 #d p {
   line-height: 1.6;
   margin: 15px 0;
+}
+
+/* CAPTCHA验证界面样式 */
+#captcha-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#captcha-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#captcha-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#captcha-agree {
+  margin-top: 3px;
+}
+
+#captcha-agreement label {
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+#captcha-input {
+  width: 100%;
+  padding: 8px;
+  background-color: #000;
+  color: #0f0;
+  border: 1px solid #0f0;
+  outline: none;
+}
+
+#captcha-input:focus {
+  border-color: #0f0;
+  box-shadow: 0 0 5px #0f0;
+}
+
+#captcha-submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #000;
+  color: #0f0;
+  border: 1px solid #0f0;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+
+#captcha-submit:hover {
+  background-color: #0f0;
+  color: #000;
 }
