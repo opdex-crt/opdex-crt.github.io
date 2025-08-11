@@ -24,15 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
   var r = document.querySelectorAll('.qwy');
   var n = document.getElementById('captcha-submit');
   
+  // 修复关键：保存CAPTCHA HTML内容
+  var captchaHtml = document.getElementById('captcha-container').parentNode.innerHTML;
+  
   r.forEach(function(i) {
     i.addEventListener('click', function() {
       if (this.dataset.id === 'captcha') {
-        p.innerHTML = document.getElementById('captcha-container').parentNode.innerHTML;
+        // 使用保存的HTML恢复CAPTCHA界面
+        p.innerHTML = captchaHtml;
       } else {
         p.innerHTML = z[this.dataset.id];
       }
     });
   });
   
-  p.innerHTML = document.getElementById('captcha-container').parentNode.innerHTML;
+  p.innerHTML = captchaHtml;
 });
