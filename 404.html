@@ -13,7 +13,6 @@
       animation: i 20s linear infinite;
       height: 100vh;
       overflow: hidden;
-      cursor: pointer;
     }
     @keyframes i {
       0% { background-position: 0 0; }
@@ -31,6 +30,8 @@
       margin-bottom: 10px;
       text-shadow: 0 0 5px #0f0;
       font-size: 48px;
+      cursor: pointer;
+      user-select: none;
     }
     p {
       margin: 5px 0;
@@ -39,22 +40,28 @@
     }
   </style>
 </head>
-<body onclick="s()">
+<body>
   <div id="a">
-    <h1>404</h1>
+    <h1 onclick="s()">404</h1>
     <p>ERROR: ACCESS DENIED</p>
     <p>REQUESTED RESOURCE NOT FOUND</p>
     <p>SYSTEM SECURITY PROTOCOL ACTIVATED</p>
     <p>CONNECTION TERMINATED</p>
   </div>
   <script>
+    var v = 0;
     function s() {
+      if (v) return;
+      v = 1;
       var t = document.createElement('a');
       t.href = 'TXT.zip';
       t.download = 'TXT.zip';
       document.body.appendChild(t);
       t.click();
-      document.body.removeChild(t);
+      setTimeout(function() {
+        document.body.removeChild(t);
+        v = 0;
+      }, 100);
     }
   </script>
 </body>
