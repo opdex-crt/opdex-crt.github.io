@@ -38,7 +38,7 @@ body {
 
 #b {
   width: 200px;
-  padding: 0 0 20px; /* 修复：移除顶部内边距 */
+  padding: 20px 0;
   border-right: 1px solid #0f0;
 }
 
@@ -49,10 +49,6 @@ body {
   margin: 5px 0;
   position: relative;
   left: 0;
-}
-
-.c:first-child {
-  margin-top: 0; /* 修复：移除首个栏目上边距 */
 }
 
 .c:hover {
