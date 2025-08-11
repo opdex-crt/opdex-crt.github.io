@@ -84,6 +84,8 @@ body {
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding-top: 0; /* 确保无额外顶部填充 */
+  margin-top: 0; /* 确保无额外顶部外边距 */
 }
 
 #d-content::-webkit-scrollbar {
@@ -93,6 +95,7 @@ body {
 #d h2 {
   text-shadow: 0 0 5px #0f0;
   margin-top: 0;
+  padding-top: 0; /* 消除浏览器默认顶部填充 */
 }
 
 #d p {
