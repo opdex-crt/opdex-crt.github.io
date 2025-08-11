@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background-color: #000;
+  color: #0f0;
+  background-image: linear-gradient(rgba(0, 255, 0, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 0, 0.22) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: e 20s linear infinite;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@keyframes e {
+  0% { background-position: 0 0; }
+  100% { background-position: -140px -140px; }
+}
+
+#a {
+  display: flex;
+  height: 100vh;
+}
+
+#b {
+  width: 200px;
+  padding: 20px 0;
+  border-right: 1px solid #0f0;
+}
+
+.c {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin: 5px 0;
+  position: relative;
+  left: 0;
+}
+
+.c:hover {
+  background-color: #0f0;
+  color: #000;
+  left: -5px;
+}
+
+#d {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#d h2 {
+  text-shadow: 0 0 5px #0f0;
+  margin-top: 0;
+}
+
+#d p {
+  line-height: 1.6;
+  margin: 15px 0;
+}
