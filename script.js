@@ -24,7 +24,8 @@ function c() {
   }
   if (k === x && l === y) {
     document.cookie = 'CRT_session=active; path=/';
-    return true;
+    window.location.href = 'home.html';
+    return false;
   }
   h.style.opacity = '1';
   h.style.visibility = 'visible';
