@@ -8,6 +8,9 @@ body {
   animation: e 20s linear infinite;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes e {
@@ -15,9 +18,22 @@ body {
   100% { background-position: -140px -140px; }
 }
 
+#w {
+  border: 1px solid #0f0;
+  border-radius: 4px;
+  box-shadow: 
+    0 0 0 1px #0f0,
+    0 0 15px rgba(0, 255, 0, 0.3),
+    inset 0 0 10px rgba(0, 255, 0, 0.1);
+  width: 90%;
+  max-width: 1200px;
+  height: 85vh;
+  overflow: hidden;
+}
+
 #a {
   display: flex;
-  height: 100vh;
+  height: 100%;
 }
 
 #b {
