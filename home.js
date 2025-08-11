@@ -18,6 +18,4 @@ document.addEventListener('DOMContentLoaded', function() {
       g.innerHTML = f[this.dataset.id];
     });
   });
-  
-  g.innerHTML = f['100523'];
 });
