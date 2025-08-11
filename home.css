@@ -38,19 +38,19 @@ body {
 
 #b {
   width: 200px;
-  padding: 20px 0;
+  padding: 17px 0 20px 0; /* 精确调整上内边距 */
   border-right: 1px solid #0f0;
 }
 
 .c {
-  padding: 12px 15px; /* 微调垂直间距 */
+  padding: 12px 15px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin: 5px 0;
   position: relative;
   left: 0;
-  font-size: 16px; /* 字体加大 */
-  font-weight: bold; /* 字体加粗 */
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .c:hover {
@@ -61,7 +61,7 @@ body {
 
 #d {
   flex: 1;
-  padding: 20px;
+  padding: 20px; /* 保持原值 */
   overflow: hidden;
   position: relative;
 }
