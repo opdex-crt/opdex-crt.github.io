@@ -258,3 +258,18 @@ body.red-mode #captcha-submit:hover {
   background-color: #0f0;
   color: #000;
 }
+
+/* 错误提示样式 */
+.error-message {
+  color: #f00;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  text-align: center;
+  min-height: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.error-message.active {
+  opacity: 1;
+}
