@@ -18,6 +18,69 @@ body {
   100% { background-position: -140px -140px; }
 }
 
+/* 红色主题样式 */
+body.red-mode {
+  background-color: #300;
+  color: #f00;
+  background-image: linear-gradient(rgba(255, 0, 0, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.22) 1px, transparent 1px);
+}
+
+body.red-mode #xqk {
+  border-color: #f00;
+  box-shadow: 
+    0 0 0 1px #f00,
+    0 0 15px rgba(255, 0, 0, 0.3),
+    inset 0 0 10px rgba(255, 0, 0, 0.1);
+}
+
+body.red-mode #lfr {
+  border-right-color: #f00;
+}
+
+body.red-mode .qwy:hover {
+  background-color: #f00;
+  color: #000;
+  left: -5px;
+}
+
+body.red-mode #vpm::after {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+body.red-mode #vpm:hover::after {
+  background: rgba(255, 0, 0, 0.25);
+}
+
+body.red-mode #kzh h2 {
+  text-shadow: 0 0 5px #f00;
+}
+
+body.red-mode #captcha-agreement a {
+  color: #ff00cc;
+}
+
+body.red-mode #captcha-agreement a:hover {
+  color: #ff00ff;
+  text-shadow: 0 0 3px #ff00ff;
+}
+
+body.red-mode #captcha-input,
+body.red-mode #captcha-submit {
+  background-color: #300;
+  border-color: #f00;
+  color: #f00;
+}
+
+body.red-mode #captcha-input:focus {
+  border-color: #f00;
+  box-shadow: 0 0 5px #f00;
+}
+
+body.red-mode #captcha-submit:hover {
+  background-color: #f00;
+  color: #000;
+}
+
 #xqk {
   border: 1px solid #0f0;
   border-radius: 4px;
