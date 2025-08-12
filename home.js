@@ -33,17 +33,17 @@ document.addEventListener('DOMContentLoaded', function() {
   
   r.forEach(function(i) {
     i.addEventListener('click', function() {
-      // 移除红色模式
-      document.body.classList.remove('red-mode');
-      
+      // 优化1：先设置内容再切换主题（避免闪烁）
       if (this.dataset.id === 'captcha') {
-        // 使用保存的HTML恢复CAPTCHA界面
         p.innerHTML = captchaHtml;
+        document.body.classList.remove('red-mode');
       } else {
         p.innerHTML = z[this.dataset.id];
-        // 如果是#400001，添加红色模式
+        // 优化2：直接切换主题（不触发重排）
         if (this.dataset.id === '400001') {
           document.body.classList.add('red-mode');
+        } else {
+          document.body.classList.remove('red-mode');
         }
       }
     });
