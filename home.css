@@ -11,6 +11,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.3s, color 0.3s; /* 消除闪烁的关键 */
 }
 
 @keyframes e {
@@ -23,6 +24,7 @@ body.red-mode {
   background-color: #300;
   color: #f00;
   background-image: linear-gradient(rgba(255, 0, 0, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.22) 1px, transparent 1px);
+  transition: background-color 0.3s, color 0.3s; /* 消除闪烁的关键 */
 }
 
 body.red-mode #xqk {
@@ -92,6 +94,7 @@ body.red-mode #captcha-submit:hover {
   max-width: 1200px;
   height: 85vh;
   overflow: hidden;
+  transition: all 0.3s; /* 消除闪烁的关键 */
 }
 
 #jbn {
@@ -120,6 +123,16 @@ body.red-mode #captcha-submit:hover {
   background-color: #0f0;
   color: #000;
   left: -5px;
+}
+
+/* 绿色界面下的红色栏目 */
+.red-report {
+  color: #f00 !important;
+}
+
+.red-report:hover {
+  background-color: #f00 !important;
+  color: #000 !important;
 }
 
 #vpm {
