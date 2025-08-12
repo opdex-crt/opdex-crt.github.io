@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  // 验证hpm cookie是否存在
+  // 验證hpm cookie是否存在
   function hasHpmPermission() {
     return document.cookie.includes('hpm=active');
   }
@@ -35,4 +35,60 @@ document.addEventListener('DOMContentLoaded', function() {
     
     '200366': '<h2>Research Report</h2><p>ID: 200366</p><p>Date: July 20</p><p>Experimental Process:<br>Subjects from Report 200359 (primates/parrots/cats/dogs) wore tungsten-titanium spike devices (edge curvature ≤30nm, pre-loaded OPDEX 50kJ) affixed via Spine Vertex Anchors to the occipital bone (non-implanted). Continuous 72h monitoring with Synapto-Tracer Neural Scanners recording cerebral changes.</p><h3>Experimental Results:</h3><p>Adhesion Enhancement:<br>Mean adhesion duration extended to 36.5±4.2 hours (120× longer than non-carrier groups);<br>Energy fluctuation entropy reduced by 92%, with no physiological collapse or structural damage.</p><p>Neural Erosion Phenomena:<br>All subjects exhibited intermittent manic episodes (frequency: 2.3/h), accompanied by:<br>Emotional suppression: 78% reduced emotion system activity;<br>Neural erosion: OPDEX etch patterns in prefrontal cortex (depth≈5μm).</p>xZlL23-<p>Extreme-Emotion Energy Surges:<br>Manic phases triggered energy pulses: peaks at 1200 kJ/s (baseline 50 kJ/s);<br>Spike metrics: body temperature (+300%), EMG amplitude (+950%), enkephalin (+700%).</p><h3>Experimental Conclusion:</h3><p>Spike wearables enable exogenous energy anchoring that enhances OPDEX stability but induce uncontrolled neural erosion. This erosion selectively inhibits emotional pathways, yet triggers Energy Backfeed Surges (EBS) during extreme emotions. The paradox warns that emotional volatility may amplify energy, mandating suspension of all sapient applications until etch mechanism is fully deciphered.</p><h3>Notes Section:</h3><p>Spine Vertex Anchor: Non-invasive external fixture utilizing negative-pressure adhesion and bone-conduction resonance.<br>Synapto-Tracer Neural Scanner: Real-time synaptic imaging system tracking neurotransmitter dynamics.</p>',
     
-    '300092': '<h2>Research Report</h2><
+    '300092': '<h2>Research Report</h2><p>ID: 300092</p><p>Date: July 24</p><p>Experimental Process:<br>Three plant types across evolutionary tiers were tested:<br>Low-tier: ZY moss (*Bryo ZY-2*, photosynthetic rate 0.8μmol/m²/s)<br>Mid-tier: Fernleaf tree (*Pterido ZY-5*, vascular plant)<br>High-tier: Photonux flower (*Photonux ZY-1*, angiosperm analogue)<br>Samples were exposed to high-intensity OPDEX fields (100 kJ/s) for 48h. Physiological parameters monitored via Phyto-Null Arrays, with same-species controls.</p><h3>Experimental Results:</h3><p>Energy Adhesion Nullification:<br>Zero OPDEX adhesion detected on surface/internal tissues (energy reflectivity 99.97%);<br>Spike device adhesion coefficient =0 on plants (vs. ≥0.85 in fauna).</p><p>Physiological Null Response:<br>Photosynthetic efficiency fluctuation ±0.3% (natural error range);<br>Bioelectric signal entropy Δ≤0.01 (threshold of Chlorospectrum Analyzer);<br>No significant differences in mitosis rate, enzyme activity, or gene expression vs. controls (p>0.95).</p><p>Long-term Exposure Validation:<br>Zero structural damage, energy residue, or metabolic abnormality after 48h.</p><h3>Experimental Conclusion:</h3><p>Plants exhibit Absolute Bio-inertia toward OPDEX energy, attributed to natural barriers from cellulose matrices and chloroplast photosystems. This confirms OPDEX coupling exclusively requires animal neural signals or synthetic crystalline structures (Report 100711). Plant-based materials (e.g., ZY moss extract) are proposed as safe energy-isolation layers to mitigate in vivo risks.</p>xZlL23-<h3>Notes Section:</h3><p>Phyto-Null Array: Plant-specific energy-response detector integrating impedance spectroscopy and metabolic flux analysis.<br>Chlorospectrum Analyzer: Chlorophyll-mediated bioelectric signal amplifier with picosiemens resolution.</p>',
+    
+    'dlt': document.getElementById('dlt-content').innerHTML,
+    
+    '400001': '<h2>Research Report</h2><p>ID: 400001</p><p>Date: August 3rd</p><p>Experimental Process:<br>Three human subjects (signatories of ███-7 Protocol) directly exposed to OPDEX fields (200 kJ/s). No spike carriers or neural interfaces used. Conducted in ████-class containment with real-time vital monitoring. Dose ramped 0→threshold in 30 sec.</p><h3>Experimental Results:</h3><p>Initial Phase (5sec):<br>Dermal ███: Systemic capillary █████ showing web-like rupture (blood loss ≈1.5L)<br>Osseous ██: Long bones emitting high-frequency ███ sounds (stress cracks detected)</p><p>Critical Dissolution (15sec):<br>Abdominal ██: Viscera expelled via █████ tracts (primary components: ███ & ██ tissue)<br>Cranial ██: Left orbit ███████ (CSF boiling point reduced to 60℃)</p><p>Terminal Phase (25sec):<br>Systemic ████: Tissue underwent ████ dissociation (residues: ███ carbonized granules + ███ crystals)<br>Energy backlash: Released ████ shockwave (destroyed 3 ████ sensors)</p><h3>Experimental Conclusion:</h3><p>Carrier-free OPDEX exposure causes ████-class biogenic annihilation in humans. ███ Protocols provide no substantive protection; all physiological defenses failed within ██ seconds. Recommend termination of direct exposure trials on non-O subjects, redirecting to ███ carrier-isolation studies.</p><h3>Notes Section:</h3><p>All subjects signed CRD-7 Ultimate Waiver (Clause 4.2: Acceptance of irreversible neural annihilation risks)<br>████ denotes data corruption due to energy overload</p>'
+  };
+  
+  var p = document.getElementById('kzh');
+  var r = document.querySelectorAll('.qwy');
+  var n = document.getElementById('captcha-submit');
+  var captchaInput = document.getElementById('captcha-input');
+  var captchaError = document.getElementById('captcha-error');
+  
+  // 修复关键：保存CAPTCHA HTML内容
+  var captchaHtml = document.getElementById('captcha-container').parentNode.innerHTML;
+  
+  // CAPTCHA验证处理
+  n.addEventListener('click', function() {
+    var captcha = captchaInput.value.trim();
+    
+    if (document.getElementById('captcha-agree').checked && validateCaptcha(captcha)) {
+      setHpmCookie();
+      // 成功后显示CAPTCHA界面（实际会立即切换到其他内容）
+      p.innerHTML = captchaHtml;
+    } else {
+      captchaError.style.display = 'block';
+      setTimeout(function() {
+        captchaError.style.display = 'none';
+      }, 3000);
+    }
+  });
+  
+  r.forEach(function(i) {
+    i.addEventListener('click', function() {
+      // 修复关键：只有#400001需要hpm权限
+      if (this.dataset.id === 'captcha') {
+        p.innerHTML = captchaHtml;
+        document.body.classList.remove('red-mode');
+      } else if (this.dataset.id === '400001' && !hasHpmPermission()) {
+        // 无权限访问#400001
+        p.innerHTML = '<h2>Access Denied</h2><p>Permission hpm required to access this report.</p><p>Return to <span style="color:#0f0;cursor:pointer;text-decoration:underline" onclick="location.reload()">CAPTCHA verification</span>.</p>';
+      } else {
+        // 所有其他报告无需hpm权限
+        p.innerHTML = z[this.dataset.id];
+        
+        // 仅#400001需要红色主题
+        if (this.dataset.id === '400001') {
+          document.body.classList.add('red-mode');
+        } else {
+          document.body.classList.remove('red-mode');
+        }
+      }
+    });
+  });
+  
+  p.innerHTML = captchaHtml;
+});
