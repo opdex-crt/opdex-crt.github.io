@@ -4,22 +4,45 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
   
-  // 验證hpm cookie是否存在
+  // 检查hpm cookie是否存在
   function hasHpmPermission() {
-    return document.cookie.includes('hpm=active');
+    return document.cookie.includes('hpm=true');
   }
   
-  // 设置hpm cookie（1小时有效期）
+  // 设置hpm cookie（有效期1小时）
   function setHpmCookie() {
-    var date = new Date();
+    const date = new Date();
     date.setTime(date.getTime() + (60 * 60 * 1000)); // 1小时
-    var expires = "expires=" + date.toUTCString();
-    document.cookie = "hpm=active;" + expires + ";path=/";
+    document.cookie = "hpm=true; expires=" + date.toUTCString() + "; path=/";
   }
   
-  // 驗證CAPTCHA
-  function validateCaptcha(captcha) {
-    return captcha === "X3tRh8-xZlL23-0vd4jS-Az7qc2";
+  // 验证CAPTCHA
+  function validateCaptcha() {
+    const captchaInput = document.getElementById('captcha-input');
+    const captchaAgree = document.getElementById('captcha-agree');
+    const captchaError = document.getElementById('captcha-error');
+    
+    const correctCaptcha = "X3tRh8-xZlL23-0vd4jS-Az7qc2";
+    
+    // 重置错误消息
+    captchaError.classList.remove('active');
+    
+    if (!captchaAgree.checked) {
+      captchaError.textContent = "You must agree to the agreements";
+      setTimeout(() => captchaError.classList.add('active'), 10);
+      return false;
+    }
+    
+    if (captchaInput.value.trim() !== correctCaptcha) {
+      captchaInput.value = '';
+      captchaError.textContent = "Invalid CAPTCHA. Please try again.";
+      setTimeout(() => captchaError.classList.add('active'), 10);
+      return false;
+    }
+    
+    // 验证通过，设置hpm cookie
+    setHpmCookie();
+    return true;
   }
   
   var z = {
@@ -45,47 +68,51 @@ document.addEventListener('DOMContentLoaded', function() {
   var p = document.getElementById('kzh');
   var r = document.querySelectorAll('.qwy');
   var n = document.getElementById('captcha-submit');
-  var captchaInput = document.getElementById('captcha-input');
-  var captchaError = document.getElementById('captcha-error');
   
   // 修复关键：保存CAPTCHA HTML内容
   var captchaHtml = document.getElementById('captcha-container').parentNode.innerHTML;
   
-  // CAPTCHA验证处理
+  // CAPTCHA提交处理
   n.addEventListener('click', function() {
-    var captcha = captchaInput.value.trim();
-    
-    if (document.getElementById('captcha-agree').checked && validateCaptcha(captcha)) {
-      setHpmCookie();
-      // 成功后显示CAPTCHA界面（实际会立即切换到其他内容）
+    if (validateCaptcha()) {
+      // 验证通过后恢复CAPTCHA界面
       p.innerHTML = captchaHtml;
-    } else {
-      captchaError.style.display = 'block';
-      setTimeout(function() {
-        captchaError.style.display = 'none';
-      }, 3000);
+      document.getElementById('captcha-input').value = '';
+      document.getElementById('captcha-agree').checked = false;
     }
   });
   
   r.forEach(function(i) {
     i.addEventListener('click', function() {
-      // 修复关键：只有#400001需要hpm权限
+      // 优化1：先设置内容再切换主题（避免闪烁）
       if (this.dataset.id === 'captcha') {
         p.innerHTML = captchaHtml;
         document.body.classList.remove('red-mode');
-      } else if (this.dataset.id === '400001' && !hasHpmPermission()) {
-        // 无权限访问#400001
-        p.innerHTML = '<h2>Access Denied</h2><p>Permission hpm required to access this report.</p><p>Return to <span style="color:#0f0;cursor:pointer;text-decoration:underline" onclick="location.reload()">CAPTCHA verification</span>.</p>';
-      } else {
-        // 所有其他报告无需hpm权限
-        p.innerHTML = z[this.dataset.id];
-        
-        // 仅#400001需要红色主题
-        if (this.dataset.id === '400001') {
+      } else if (this.dataset.id === '400001') {
+        // 检查hpm权限
+        if (hasHpmPermission()) {
+          p.innerHTML = z[this.dataset.id];
           document.body.classList.add('red-mode');
         } else {
+          // 无权限，显示错误消息
+          p.innerHTML = '<div class="permission-denied"><h2>Access Denied</h2><p>ERROR 403: Insufficient permissions</p><p>You must obtain hpm permissions to access this resource.</p><p>Return to <a href="#" class="back-to-captcha">CAPTCHA verification</a>.</p></div>';
           document.body.classList.remove('red-mode');
+          
+          // 添加返回CAPTCHA的链接处理
+          setTimeout(function() {
+            const backLink = document.querySelector('.back-to-captcha');
+            if (backLink) {
+              backLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                p.innerHTML = captchaHtml;
+              });
+            }
+          }, 10);
         }
+      } else {
+        p.innerHTML = z[this.dataset.id];
+        // 优化2：直接切换主题（不触发重排）
+        document.body.classList.remove('red-mode');
       }
     });
   });
