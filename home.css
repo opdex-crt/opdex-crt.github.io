@@ -136,6 +136,19 @@ body {
   cursor: pointer;
 }
 
+/* 协议链接样式 */
+#captcha-agreement a {
+  color: #00ccff;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#captcha-agreement a:hover {
+  color: #00ffff;
+  text-shadow: 0 0 3px #00ffff;
+}
+
 #captcha-input {
   width: 100%;
   padding: 8px 10px;
