@@ -1,0 +1,136 @@
+document.addEventListener('DOMContentLoaded', function() {
+  if (!document.cookie.includes('CRT_session=active')) {
+    window.location.href = 'index.html';
+    return;
+  }
+  
+  // 检查hpm cookie是否存在
+  function hasHpmPermission() {
+    return document.cookie.includes('hpm=true');
+  }
+  
+  // 设置hpm cookie（有效期1小时）
+  function setHpmCookie() {
+    const date = new Date();
+    date.setTime(date.getTime() + (60 * 60 * 1000)); // 1小时
+    document.cookie = "hpm=true; expires=" + date.toUTCString() + "; path=/";
+  }
+  
+  // 显示状态消息
+  function showStatusMessage(message, isError = false) {
+    const statusEl = document.getElementById('captcha-status');
+    statusEl.textContent = message;
+    statusEl.className = isError ? 'status-error' : 'status-success';
+    
+    // 3秒后清除消息
+    setTimeout(() => {
+      if (statusEl.textContent === message) {
+        statusEl.textContent = '';
+        statusEl.className = '';
+      }
+    }, 3000);
+  }
+  
+  // 验证CAPTCHA
+  function validateCaptcha() {
+    const captchaInput = document.getElementById('captcha-input');
+    const captchaAgree = document.getElementById('captcha-agree');
+    
+    const correctCaptcha = "X3tRh8-xZlL23-0vd4jS-Az7qc2";
+    
+    if (!captchaAgree.checked) {
+      showStatusMessage("You must agree to the agreements", true);
+      return false;
+    }
+    
+    if (captchaInput.value.trim() !== correctCaptcha) {
+      captchaInput.value = '';
+      showStatusMessage("Invalid CAPTCHA. Please try again.", true);
+      return false;
+    }
+    
+    // 验证通过，设置hpm cookie
+    setHpmCookie();
+    showStatusMessage("Access granted. You now have permissions to view restricted content.");
+    
+    // 保持CAPTCHA界面显示，但清空输入框
+    document.getElementById('captcha-input').value = '';
+    
+    return true;
+  }
+  
+  var z = {
+    '100523': '<h2>Research Report</h2>xZlL23-<p>ID: 100523</p><p>Date: June 15</p><p>Experimental Process: In this experiment, a standard titanium alloy sample (Ti-6Al-4V) was placed in a stable OPDEX energy field. A continuous OPDEX flow was applied via a Quantrix injector, with energy intensity maintained at 50 kilojoules per second. The experiment lasted for 12 time units (approximately 1 Earth hour). Initial sample states were recorded, and real-time physical parameter changes were monitored using high-resolution scanning electron microscopy (SEM) and X-ray diffraction (XRD) for data acquisition.</p><h3>Experimental Results:</h3><p>OPDEX energy adhesion difficulty is extremely high: The sample surface adhesion coefficient was only 0.05, significantly below the threshold of 0.3, indicating a pronounced repulsive effect.</p><p>Solid material density surge: The average density increased from 4.43 g/cm³ to 8.0 g/cm³, representing an 80% increase.</p><p>Fractures appeared: Microscopic fractures formed on the sample surface and internally, with an average fracture density of 15 per square millimeter and a maximum fracture depth of 100 micrometers.</p><p>Volume showed no significant change: The sample volume change rate was less than ±0.5%, maintaining dimensional stability.</p><h3>Experimental Conclusion:</h3><p>The experiment confirms that OPDEX energy exhibits low adhesion in solid materials, likely due to molecular-level repulsive forces. The density surge is attributed to lattice structure compression, leading to internal stress accumulation and fracture formation. The unchanged volume indicates no phase transition or expansion occurred. This poses limitations for OPDEX energy applications in solid-state devices (e.g., energy storage units), necessitating further research into interface modification techniques.</p><h3>Notes Section:</h3><p>Quantrix injector: An energy transmission device.</p>',
+    
+    '100704': '<h2>Research Report</h2><p>ID: 100704</p><p>Date: June 20</p>xZlL23-<p>Experimental Process:<br>A controlled experiment compared planar substrates (Group A) with nano-cone array substrates (Group B, tip curvature radius ≈200nm). Both groups used silicon wafers (99.999% purity) under identical OPDEX fields (50 kJ/s, Quantrix injector). Energy distribution was monitored via a Stellaron Field Mapper, with a 12-time-unit duration.</p><h3>Experimental Results:</h3><p>Adhesion Bias:<br>Group A (Planar): Surface adhesion coefficient = 0.07 (±0.02)<br>Group B (Tips): Adhesion coefficient at tips = 0.85±0.03, with energy density peaking at cone apices (Fig.1).</p><p>Stability Difference:<br>Group A energy retention time ≤5 sec;<br>Group B tip retention time ≥120 sec without significant decay (p<0.01).</p><p>Structural Integrity:<br>Group B cones showed zero fractures (density surge +15% only), while Group A developed macro-cracks (consistent with Report 100123).</p><h3>Experimental Conclusion:</h3><p>OPDEX energy exhibits significant adhesion preference for high-curvature tip structures, with stability attributed to Field-Induced Focusing. Tip-based designs mitigate density surge risks, providing an optimization path for solid-state energy receivers (e.g., OPDEX rectennas). Biological compatibility verification is required before advancing to in vivo trials.</p><h3>Notes Section:</h3><p>Stellaron Field Mapper: A 3D energy field mapping device.</p>',
+    
+    '100711': '<h2>Research Report</h2><p>ID: 100711</p><p>Date: June 24</p><p>Experimental Process:<br>A comparative experiment tested angulated silicon structures (Group C: cubic pyramids, edge radius ≤50nm) against pure-curved tips (Group D: hemispheres, radius=200nm). Pre-treated substrates were exposed to a uniform OPDEX field (60 kJ/s). Real-time energy distribution was scanned via Vertexion Probes (1kHz sampling), recording micro-region adhesion dynamics at edges vs. curves.</p>xZlL23-<h3>Experimental Results:</h3><p>Edge Adhesion Superiority:<br>Group C edge adhesion coefficient = 0.92±0.01 (Group D curved tips: 0.78±0.03);<br>Edge energy density was 1.8× higher than curved tips (Fig.2 topogram).</p><p>Stability Mechanism:<br>Group C edge retention time ≥300 sec (Group D: 95 sec) with 40% reduced fluctuation entropy;<br>Self-repair effect at edges: Micro-fracture density (0.1/μm²) was lower than curved zones (2.3/μm²).</p><p>Critical Edge Effect:<br>Adhesion stability increased exponentially when edge radius <30nm (*R²=0.98*).</p><h3>Experimental Conclusion:</h3><p>Angulated structures enhance OPDEX energy capture efficiency and stability via Field Distortion Amplification (FDA), where sharp edges generate localized intense fields that suppress lattice stress accumulation. Energy harvesters should adopt polyhedral serrated designs (edge radius ≤30nm), achieving 118% efficacy gain over pure-curved solutions (Report 100704).</p><h3>Notes Section:</h3><p>Vertexion Probe: A nanoscale field-sensing device.</p>',
+    
+    '200021': '<h2>Research Report</h2><p>ID: 200021</p><p>Date: July 2</p><p>Experimental Process:<br>Standard lab mice (*Mus ZY-9*, 30g±2g) were implanted with micro-OPDEX conduits targeting the thalamus. Gradient energy (0→80 kJ/s, 10kJ/s steps) was injected via a Neuroflux Coupler, with real-time vital sign monitoring. Experiments conducted in Class Ⅲ biocontainment.</p><h3>Experimental Results:</h3><p>Energy Tolerance Threshold:<br>≤40kJ/s: Agitation and pupillary dilation (pre-seizure symptoms);<br>≥60kJ/s: Localized body expansion (dermal temperature spiked to 220℃);<br>80kJ/s (3sec exposure): Full-body explosive disintegration.</p>xZlL23-<p>Catastrophic Damage:<br>Torso rupture with radial viscera expulsion (max. splatter radius 1.5m);<br>Skeletal fragmentation (particle size <0.5mm), 99% muscle carbonization;<br>No intact organs detected.</p><p>Control Group:<br>Blank energy (0kJ/s) and sham surgery groups showed zero anomalies.</p><h3>Experimental Conclusion:</h3><p>OPDEX energy at ≥60kJ/s doses exhibits extreme biocompatibility failure in murine models. Intra-body Energy Collapse (IEC)—triggered by instantaneous fluid vaporization—causes explosive trauma. This may validate the "Rodent-Repulsion Hypothesis" (OPDEX rejection of mammalian neural signals). Further in vivo trials are suspended; research redirected to non-neural tissues.</p><h3>Notes Section:</h3><p>Neuroflux Coupler: Neural interface device, optimized for OPDEX-band synchronization.<br>*Mus ZY-9*: Standard ZetaY lab mouse strain.</p>',
+    
+    '200359': '<h2>Research Report</h2><p>ID: 200359</p><p>Date: July 17</p><p>Experimental Process:<br>OPDEX exposure tests were conducted on four intelligence-tiered species:<br>Primates: Simius ZY-α (sapien-like apes, n=10)<br>Parrots: *Psittacus ZY-5* (vocal learners, n=15)<br>Cats/Dogs: *Felis ZY-7* & *Canis ZY-3* (social cooperators, n=12 each)<br>Control group: low-intelligence mice (*Mus ZY-9*, n=20). Uniform dose (50kJ/s) was delivered via a Cerebrolink Field, with adhesion duration and physiological collapse thresholds monitored.</p><h3>Experimental Results:</h3><p>Adhesion Duration Disparity:<br>High-intelligence group: Mean adhesion 18.2±3.1 min (primates max: 25.4 min);<br>Control group (mice): Adhesion ≤3 sec (cf. Report 200021).</p><p>Unified Lethal Outcome:<br>All subjects ultimately died from Neural Meltdown:<br>Primates: Cortical liquefaction (>500℃);<br>Parrots: Syrinx carbonization with feather auto-ignition;<br>Cats/Dogs: Autonomic nervous system electrolytic explosion.</p><p>Intelligence Correlation:<br>Adhesion duration positively correlated with Zeta-C Scale scores (*r=0.89, p<0.001*).</p>xZlL23-<h3>Experimental Conclusion:</h3><p>Despite prolonged adhesion in intelligent species (360× longer than rodents), OPDEX energy invariably induces fatal biocompatibility failure. Neural Meltdown represents a cross-species terminal endpoint, suggesting lethal resonance with advanced neural activity. Given irreversible damage and ethical thresholds in intelligent being trials, any advancement toward sub-sapient or higher lifeforms demands extreme caution, necessitating re-evaluation of energy-host adaptation paradigms.</p><h3>Notes Section:</h3><p>Cerebrolink Field: Non-invasive energy projection system, optimized for OPDEX-band focusing.<br>Zeta-C Scale: Official ZetaY intelligence metric (0-100), incorporating cognition, sociality, and tool-use parameters.</p>',
+    
+    '200366': '<h2>Research Report</h2><p>ID: 200366</p><p>Date: July 20</p><p>Experimental Process:<br>Subjects from Report 200359 (primates/parrots/cats/dogs) wore tungsten-titanium spike devices (edge curvature ≤30nm, pre-loaded OPDEX 50kJ) affixed via Spine Vertex Anchors to the occipital bone (non-implanted). Continuous 72h monitoring with Synapto-Tracer Neural Scanners recording cerebral changes.</p><h3>Experimental Results:</h3><p>Adhesion Enhancement:<br>Mean adhesion duration extended to 36.5±4.2 hours (120× longer than non-carrier groups);<br>Energy fluctuation entropy reduced by 92%, with no physiological collapse or structural damage.</p><p>Neural Erosion Phenomena:<br>All subjects exhibited intermittent manic episodes (frequency: 2.3/h), accompanied by:<br>Emotional suppression: 78% reduced emotion system activity;<br>Neural erosion: OPDEX etch patterns in prefrontal cortex (depth≈5μm).</p>xZlL23-<p>Extreme-Emotion Energy Surges:<br>Manic phases triggered energy pulses: peaks at 1200 kJ/s (baseline 50 kJ/s);<br>Spike metrics: body temperature (+300%), EMG amplitude (+950%), enkephalin (+700%).</p><h3>Experimental Conclusion:</h3><p>Spike wearables enable exogenous energy anchoring that enhances OPDEX stability but induce uncontrolled neural erosion. This erosion selectively inhibits emotional pathways, yet triggers Energy Backfeed Surges (EBS) during extreme emotions. The paradox warns that emotional volatility may amplify energy, mandating suspension of all sapient applications until etch mechanism is fully deciphered.</p><h3>Notes Section:</h3><p>Spine Vertex Anchor: Non-invasive external fixture utilizing negative-pressure adhesion and bone-conduction resonance.<br>Synapto-Tracer Neural Scanner: Real-time synaptic imaging system tracking neurotransmitter dynamics.</p>',
+    
+    '300092': '<h2>Research Report</h2><p>ID: 300092</p><p>Date: July 24</p><p>Experimental Process:<br>Three plant types across evolutionary tiers were tested:<br>Low-tier: ZY moss (*Bryo ZY-2*, photosynthetic rate 0.8μmol/m²/s)<br>Mid-tier: Fernleaf tree (*Pterido ZY-5*, vascular plant)<br>High-tier: Photonux flower (*Photonux ZY-1*, angiosperm analogue)<br>Samples were exposed to high-intensity OPDEX fields (100 kJ/s) for 48h. Physiological parameters monitored via Phyto-Null Arrays, with same-species controls.</p><h3>Experimental Results:</h3><p>Energy Adhesion Nullification:<br>Zero OPDEX adhesion detected on surface/internal tissues (energy reflectivity 99.97%);<br>Spike device adhesion coefficient =0 on plants (vs. ≥0.85 in fauna).</p><p>Physiological Null Response:<br>Photosynthetic efficiency fluctuation ±0.3% (natural error range);<br>Bioelectric signal entropy Δ≤0.01 (threshold of Chlorospectrum Analyzer);<br>No significant differences in mitosis rate, enzyme activity, or gene expression vs. controls (p>0.95).</p><p>Long-term Exposure Validation:<br>Zero structural damage, energy residue, or metabolic abnormality after 48h.</p><h3>Experimental Conclusion:</h3><p>Plants exhibit Absolute Bio-inertia toward OPDEX energy, attributed to natural barriers from cellulose matrices and chloroplast photosystems. This confirms OPDEX coupling exclusively requires animal neural signals or synthetic crystalline structures (Report 100711). Plant-based materials (e.g., ZY moss extract) are proposed as safe energy-isolation layers to mitigate in vivo risks.</p>xZlL23-<h3>Notes Section:</h3><p>Phyto-Null Array: Plant-specific energy-response detector integrating impedance spectroscopy and metabolic flux analysis.<br>Chlorospectrum Analyzer: Chlorophyll-mediated bioelectric signal amplifier with picosiemens resolution.</p>',
+    
+    'dlt': document.getElementById('dlt-content').innerHTML,
+    
+    '400001': '<h2>Research Report</h2><p>ID: 400001</p><p>Date: August 3rd</p><p>Experimental Process:<br>Three human subjects (signatories of ███-7 Protocol) directly exposed to OPDEX fields (200 kJ/s). No spike carriers or neural interfaces used. Conducted in ████-class containment with real-time vital monitoring. Dose ramped 0→threshold in 30 sec.</p><h3>Experimental Results:</h3><p>Initial Phase (5sec):<br>Dermal ███: Systemic capillary █████ showing web-like rupture (blood loss ≈1.5L)<br>Osseous ██: Long bones emitting high-frequency ███ sounds (stress cracks detected)</p><p>Critical Dissolution (15sec):<br>Abdominal ██: Viscera expelled via █████ tracts (primary components: ███ & ██ tissue)<br>Cranial ██: Left orbit ███████ (CSF boiling point reduced to 60℃)</p><p>Terminal Phase (25sec):<br>Systemic ████: Tissue underwent ████ dissociation (residues: ███ carbonized granules + ███ crystals)<br>Energy backlash: Released ████ shockwave (destroyed 3 ████ sensors)</p><h3>Experimental Conclusion:</h3><p>Carrier-free OPDEX exposure causes ████-class biogenic annihilation in humans. ███ Protocols provide no substantive protection; all physiological defenses failed within ██ seconds. Recommend termination of direct exposure trials on non-O subjects, redirecting to ███ carrier-isolation studies.</p><h3>Notes Section:</h3><p>All subjects signed CRD-7 Ultimate Waiver (Clause 4.2: Acceptance of irreversible neural annihilation risks)<br>████ denotes data corruption due to energy overload</p>'
+  };
+  
+  var p = document.getElementById('kzh');
+  var r = document.querySelectorAll('.qwy');
+  var n = document.getElementById('captcha-submit');
+  
+  // 修复关键：保存CAPTCHA HTML内容
+  var captchaHtml = document.getElementById('captcha-container').parentNode.innerHTML;
+  
+  // CAPTCHA提交处理
+  n.addEventListener('click', function() {
+    validateCaptcha();
+  });
+  
+  r.forEach(function(i) {
+    i.addEventListener('click', function() {
+      // 优化1：先设置内容再切换主题（避免闪烁）
+      if (this.dataset.id === 'captcha') {
+        p.innerHTML = captchaHtml;
+        document.body.classList.remove('red-mode');
+      } else if (this.dataset.id === '400001') {
+        // 检查hpm权限
+        if (hasHpmPermission()) {
+          p.innerHTML = z[this.dataset.id];
+          document.body.classList.add('red-mode');
+        } else {
+          // 无权限，显示错误消息
+          p.innerHTML = '<div class="permission-denied"><h2>Access Denied</h2><p>ERROR 403: Insufficient permissions</p><p>You must obtain hpm permissions to access this resource.</p><p>Return to <a href="#" class="back-to-captcha">CAPTCHA verification</a>.</p></div>';
+          document.body.classList.remove('red-mode');
+          
+          // 添加返回CAPTCHA的链接处理
+          setTimeout(function() {
+            const backLink = document.querySelector('.back-to-captcha');
+            if (backLink) {
+              backLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                p.innerHTML = captchaHtml;
+              });
+            }
+          }, 10);
+        }
+      } else {
+        p.innerHTML = z[this.dataset.id];
+        // 优化2：直接切换主题（不触发重排）
+        document.body.classList.remove('red-mode');
+      }
+    });
+  });
+  
+  // 初始加载
+  p.innerHTML = captchaHtml;
+  
+  // 检查是否已有hpm权限
+  if (hasHpmPermission()) {
+    showStatusMessage("You have hpm permissions. Restricted content is accessible.");
+  }
+});
