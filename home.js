@@ -16,32 +16,46 @@ document.addEventListener('DOMContentLoaded', function() {
     document.cookie = "hpm=true; expires=" + date.toUTCString() + "; path=/";
   }
   
+  // 显示状态消息
+  function showStatusMessage(message, isError = false) {
+    const statusEl = document.getElementById('captcha-status');
+    statusEl.textContent = message;
+    statusEl.className = isError ? 'status-error' : 'status-success';
+    
+    // 3秒后清除消息
+    setTimeout(() => {
+      if (statusEl.textContent === message) {
+        statusEl.textContent = '';
+        statusEl.className = '';
+      }
+    }, 3000);
+  }
+  
   // 验证CAPTCHA
   function validateCaptcha() {
     const captchaInput = document.getElementById('captcha-input');
     const captchaAgree = document.getElementById('captcha-agree');
-    const captchaError = document.getElementById('captcha-error');
     
     const correctCaptcha = "X3tRh8-xZlL23-0vd4jS-Az7qc2";
     
-    // 重置错误消息
-    captchaError.classList.remove('active');
-    
     if (!captchaAgree.checked) {
-      captchaError.textContent = "You must agree to the agreements";
-      setTimeout(() => captchaError.classList.add('active'), 10);
+      showStatusMessage("You must agree to the agreements", true);
       return false;
     }
     
     if (captchaInput.value.trim() !== correctCaptcha) {
       captchaInput.value = '';
-      captchaError.textContent = "Invalid CAPTCHA. Please try again.";
-      setTimeout(() => captchaError.classList.add('active'), 10);
+      showStatusMessage("Invalid CAPTCHA. Please try again.", true);
       return false;
     }
     
     // 验证通过，设置hpm cookie
     setHpmCookie();
+    showStatusMessage("Access granted. You now have permissions to view restricted content.");
+    
+    // 保持CAPTCHA界面显示，但清空输入框
+    document.getElementById('captcha-input').value = '';
+    
     return true;
   }
   
@@ -74,12 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // CAPTCHA提交处理
   n.addEventListener('click', function() {
-    if (validateCaptcha()) {
-      // 验证通过后恢复CAPTCHA界面
-      p.innerHTML = captchaHtml;
-      document.getElementById('captcha-input').value = '';
-      document.getElementById('captcha-agree').checked = false;
-    }
+    validateCaptcha();
   });
   
   r.forEach(function(i) {
@@ -117,5 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // 初始加载
   p.innerHTML = captchaHtml;
+  
+  // 检查是否已有hpm权限
+  if (hasHpmPermission()) {
+    showStatusMessage("You have hpm permissions. Restricted content is accessible.");
+  }
 });
